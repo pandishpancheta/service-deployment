@@ -39,21 +39,8 @@ jobs:
         with:
           version: 'v1.20.0'
         
-      # Run multiple commands in a single step
-      - name: Install NTP
-        run: sudo apt-get install ntp
-
-      - name: Install NTPUpdate
-        run: sudo apt-get install ntpdate
-
-      - name: Stop NTP
-        run: sudo service ntp stop
-
-      - name: Update NTP
-        run: sudo ntpdate ntp.ubuntu.com
-
-      - name: Start NTP
-        run: sudo service ntp start
+      - name: Export KUBECONFIG
+        run: export KUBECONFIG=/home/.kube/kubeconfig
 
       - name: Deploy deployments
         run: |
