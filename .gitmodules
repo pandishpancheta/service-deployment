@@ -1,0 +1,9 @@
+[submodule "tokenization-service"]
+	path = tokenization-service
+	url = https://github.com/pandishpancheta/tokenization-service
+[submodule "contract-observer-service"]
+	path = contract-observer-service
+	url = https://github.com/pandishpancheta/contract-observer-service
+[submodule "listings-service"]
+	path = listings-service
+	url = https://github.com/pandishpancheta/listings-service
