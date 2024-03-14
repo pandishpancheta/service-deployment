@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tokenization-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tokenization-service
+  template:
+    metadata:
+      labels:
+        app: tokenization-service
+    spec:
+      containers:
+        - name: tokenization-service
+          image: tokenization-service-image:v1.0.0
+          ports:
+            - containerPort: 50051
+          envFrom:
+            - secretRef:
+                name: tokenization_service_env_secrets
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+            requests:
+              memory: "512Mi"
+              cpu: "1"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: observer-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: observer-service
+  template:
+    metadata:
+      labels:
+        app: observer-service
+    spec:
+      containers:
+        - name: observer-service
+          image: observer-service-image:v1.0.0
+          envFrom:
+            - configMapRef:
+                name: observer-service-env-config
+            - secretRef:
+                name: observer-service-env-secrets
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+            requests:
+              memory: "512Mi"
+              cpu: "1"
