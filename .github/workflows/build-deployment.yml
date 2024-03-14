@@ -46,8 +46,14 @@ jobs:
       - name: Install NTPUpdate
         run: sudo apt-get install ntpdate
 
+      - name: Stop NTP
+        run: sudo service ntp stop
+
       - name: Update NTP
         run: sudo ntpdate ntp.ubuntu.com
+
+      - name: Start NTP
+        run: sudo service ntp start
 
       - name: Deploy deployments
         run: |
