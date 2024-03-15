@@ -17,7 +17,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: listings-service-env-secrets
+  name: db-env-secrets
 type: Opaque
 data:
   DB_HOST: ""
@@ -50,3 +50,73 @@ metadata:
 data:
   LISTINGS_SERVICE_CLIENT: "localhost:50053"
   ORDERS_SERVICE_CLIENT: "localhost:50054"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-gateway-service-env-config
+data:
+  PORT: "localhost:50053"
+  LISTINGS_SERVICE_ADDRESS: "localhost:50053"
+  ORDERS_SERVICE_ADDRESS: "localhost:50054"
+  AUTH_SERVICE_ADDRESS: "localhost:50052"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: orders-env-config
+data:
+  TCP_PORT: "localhost:50054"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-env-config
+data:
+  TCP_PORT: "localhost:50052"
+  JWT_EXPIRATION_HOURS: "24"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: auth-service-env-secrets
+type: Opaque
+data:
+  DB_HOST: ""
+  DB_PORT: ""
+  DB_USER: ""
+  DB_PASSWORD: ""
+  DB_NAME: ""
+  JWT_SECRET_KEY: ""
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:latest
+        ports:
+        - containerPort: 50050
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 50050
+      targetPort: 50050

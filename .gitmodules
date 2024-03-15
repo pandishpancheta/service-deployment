@@ -10,3 +10,9 @@
 [submodule "api-gateway-service"]
 	path = api-gateway-service
 	url = https://github.com/pandishpancheta/api-gateway-service
+[submodule "order-service"]
+	path = order-service
+	url = https://github.com/pandishpancheta/order-service
+[submodule "auth-service"]
+	path = auth-service
+	url = https://github.com/pandishpancheta/auth-service

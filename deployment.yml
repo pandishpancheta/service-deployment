@@ -76,7 +76,92 @@ spec:
             - configMapRef:
                 name: tokenization-service-env-config
             - secretRef:
-                name: tokenization-service-env-secrets
+                name: db-env-secrets
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+            requests:
+              memory: "512Mi"
+              cpu: "1"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-service
+spec:
+  selector:
+    matchLabels:
+      app: api-gateway-service
+  template:
+    metadata:
+      labels:
+        app: api-gateway-service
+    spec:
+      containers:
+        - name: api-gateway-service
+          image: api-gateway-service-image
+          envFrom:
+            - configMapRef:
+                name: api-gateway-service-env-config
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+            requests:
+              memory: "512Mi"
+              cpu: "1"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+spec:
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+        - name: order-service
+          image: order-service-image
+          envFrom:
+            - configMapRef:
+                name: order-service-env-config
+            - secretRef:
+                name: db-env-secrets
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+            requests:
+              memory: "512Mi"
+              cpu: "1"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+spec:
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+    spec:
+      containers:
+        - name: auth-service
+          image: auth-service-image
+          envFrom:
+            - configMapRef:
+                name: auth-service-env-config
+            - secretRef:
+                name: auth-service-env-secrets
           resources:
             limits:
               memory: "512Mi"
@@ -120,3 +205,39 @@ spec:
     - protocol: TCP
       port: 50056
       targetPort: 50056
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-service
+spec:
+  selector:
+    app: orders-service
+  ports:
+    - protocol: TCP
+      port: 50054
+      targetPort: 50054
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway-service
+spec:
+  selector:
+    app: api-gateway-service
+  ports:
+    - protocol: TCP
+      port: 50050
+      targetPort: 50050
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+spec:
+  selector:
+    app: auth-service
+  ports:
+    - protocol: TCP
+      port: 50052
+      targetPort: 50052
