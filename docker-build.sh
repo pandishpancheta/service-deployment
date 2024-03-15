@@ -11,7 +11,7 @@ for dir in */; do
     docker build -t techxtt/$IMAGE_NAME $dir
 
     # Transfer the Docker image to microk8s
-    docker save $IMAGE_NAME > $IMAGE_NAME.tar | microk8s ctr image import $IMAGE_NAME.tar
+    docker push techxtt/$IMAGE_NAME
 
     # Check if the build was successful
     if [ $? -eq 0 ]; then
