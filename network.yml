@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: network-troubleshooter
+  labels:
+    app: network-troubleshooter
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: network-troubleshooter
+  template:
+    metadata:
+      labels:
+        app: network-troubleshooter
+    spec:
+      containers:
+      - name: troubleshooter
+        image: ubuntu:latest 
+        command: ["/bin/bash", "-c", "--"]
+        args: ["while true; do sleep 3600; done;"] 
+        imagePullPolicy: IfNotPresent 
+        securityContext:
+          privileged: true 
