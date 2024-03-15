@@ -13,6 +13,8 @@ spec:
     spec:
       containers:
         - name: contract-observer-service
+          ports:
+          - containerPort: 50055
           image: techxtt/contract-observer-service-image:latest
           envFrom:
             - configMapRef:
@@ -42,6 +44,8 @@ spec:
     spec:
       containers:
         - name: listings-service
+          ports:
+          - containerPort: 50053
           image: techxtt/listings-service-image:latest
           envFrom:
             - configMapRef:
@@ -71,6 +75,8 @@ spec:
     spec:
       containers:
         - name: tokenization-service
+          ports:
+          - containerPort: 50056
           image: techxtt/tokenization-service-image:latest
           envFrom:
             - configMapRef:
@@ -100,6 +106,8 @@ spec:
     spec:
       containers:
         - name: api-gateway-service
+          ports:
+          - containerPort: 50051
           image: techxtt/api-gateway-service-image:latest
           envFrom:
             - configMapRef:
@@ -127,6 +135,8 @@ spec:
     spec:
       containers:
         - name: order-service
+          ports:
+          - containerPort: 50054
           image: techxtt/order-service-image:latest
           envFrom:
             - configMapRef:
@@ -156,6 +166,8 @@ spec:
     spec:
       containers:
         - name: auth-service
+          ports:
+          - containerPort: 50052
           image: techxtt/auth-service-image:latest
           envFrom:
             - configMapRef:
