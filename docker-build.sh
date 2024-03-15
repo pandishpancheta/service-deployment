@@ -8,7 +8,10 @@ for dir in */; do
     IMAGE_NAME="${dir}-image"
 
     # Build the Docker image
-    docker build -t $IMAGE_NAME $dir
+    docker build -t techxtt/$IMAGE_NAME $dir
+
+    # Push the Docker image to Docker Hub
+    docker push techxtt/$IMAGE_NAME
 
     # Check if the build was successful
     if [ $? -eq 0 ]; then
