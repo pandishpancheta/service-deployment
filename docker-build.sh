@@ -10,8 +10,8 @@ for dir in */; do
     # Build the Docker image
     docker build -t techxtt/$IMAGE_NAME $dir
 
-    # Push the Docker image to Docker Hub
-    docker push techxtt/$IMAGE_NAME
+    # Transfer the Docker image to microk8s
+    docker save $IMAGE_NAME > $IMAGE_NAME.tar | microk8s ctr image import $IMAGE_NAME.tar
 
     # Check if the build was successful
     if [ $? -eq 0 ]; then
