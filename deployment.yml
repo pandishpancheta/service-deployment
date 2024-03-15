@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: contract-observer-service
-          image: techxtt/contract-observer-service-image:latest
+          image: contract-observer-service-image:latest
           envFrom:
             - configMapRef:
                 name: contract-observer-service-env-config
@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
         - name: listings-service
-          image: techxtt/listings-service-image:latest
+          image: listings-service-image:latest
           envFrom:
             - configMapRef:
                 name: listings-service-env-config
@@ -71,7 +71,7 @@ spec:
     spec:
       containers:
         - name: tokenization-service
-          image: techxtt/tokenization-service-image:latest
+          image: tokenization-service-image:latest
           envFrom:
             - configMapRef:
                 name: tokenization-service-env-config
@@ -100,7 +100,7 @@ spec:
     spec:
       containers:
         - name: api-gateway-service
-          image: techxtt/api-gateway-service-image:latest
+          image: api-gateway-service-image:latest
           envFrom:
             - configMapRef:
                 name: api-gateway-service-env-config
@@ -127,7 +127,7 @@ spec:
     spec:
       containers:
         - name: order-service
-          image: techxtt/order-service-image:latest
+          image: order-service-image:latest
           envFrom:
             - configMapRef:
                 name: order-service-env-config
@@ -156,7 +156,7 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: techxtt/auth-service-image:latest
+          image: auth-service-image:latest
           envFrom:
             - configMapRef:
                 name: auth-service-env-config
