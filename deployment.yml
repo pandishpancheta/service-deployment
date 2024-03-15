@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: contract-observer-service
-          image: contract-observer-service-image:v1.0.0
+          image: contract-observer-service-image
           envFrom:
             - configMapRef:
                 name: contract-observer-service-env-config
@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
         - name: listings-service
-          image: listings-service-image:v1.0.0
+          image: listings-service-image
           envFrom:
             - configMapRef:
                 name: listings-service-env-config
@@ -71,7 +71,7 @@ spec:
     spec:
       containers:
         - name: tokenization-service
-          image: tokenization-service-image:v1.0.0
+          image: tokenization-service-image
           envFrom:
             - configMapRef:
                 name: tokenization-service-env-config
