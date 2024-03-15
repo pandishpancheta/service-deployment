@@ -7,3 +7,6 @@
 [submodule "listings-service"]
 	path = listings-service
 	url = https://github.com/pandishpancheta/listings-service
+[submodule "api-gateway-service"]
+	path = api-gateway-service
+	url = https://github.com/pandishpancheta/api-gateway-service
