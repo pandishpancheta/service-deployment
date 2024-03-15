@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tokenization-service-env-secrets
+type: Opaque
+data:
+  PINATA_API_KEY: ""
+  PINATA_SECRET_API_KEY: ""
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tokenization-service-env-config
+data:
+  PORT: "50056"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: listings-service-env-secrets
+type: Opaque
+data:
+  DB_HOST: ""
+  DB_PORT: ""
+  DB_USER: ""
+  DB_PASSWORD: ""
+  DB_NAME: ""
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: listings-service-env-config
+data:
+  TCP_PORT: "50053"
+  TOKENIZATION_SERVICE_ADDRESS: "localhost:50056"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: contract-observer-service-env-secrets
+type: Opaque
+data:
+  WS_URL: ""
+  CONTRACT_ADDRESS: ""
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: contract-observer-service-env-config
+data:
+  LISTINGS_SERVICE_CLIENT: "localhost:50053"
+  ORDERS_SERVICE_CLIENT: "localhost:50054"
